@@ -238,7 +238,7 @@ function getNewPos(oldPos, event) {
 }
 
 function isValidLocation(event, board) {
-    //playet hit a wall
+    //player hit a wall
     var newPlayerPos = getNewPos(gPlayerPos, event);
     if (!newPlayerPos) return false;
     if (newPlayerPos.i < 0 ||
