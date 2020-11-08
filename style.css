@@ -1,52 +1,131 @@
-.cell {
-    width: 40px;
-    height: 40px;
+       /* Remove the navbar's default margin-bottom and rounded borders */
+       .navbar {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+
+    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+    .row.content {
+        height: 450px
+    }
+
+    /* Set gray background color and 100% height */
+    .sidenav {
+        padding-top: 20px;
+        background-color: #f1f1f1;
+        height: 100%;
+    }
+
+    /* Set black background color, white text and some padding */
+    footer {
+        background-color: #555;
+        color: white;
+        padding: 15px;
+    }
+
+    /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+        .sidenav {
+            height: auto;
+            padding: 15px;
+        }
+
+        .row.content {
+            height: auto;
+        }
+    }
+
+#map {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
+     
+  }
+  
+  #menu {
+    padding: 10px;
+    
+  }
+  
+  #instruct {
+      height: 576px;
+  }
+  
+  #footer {
+      margin-top: 20px;
+  
+  }
+  
+  .col-lg-12 {
+    background-color: rgb(117, 115, 139);
+    color: wheat;
     text-align: center;
-    font-size: 1.5em;
-}
+    page-break-inside: 5px;
+  }
 
-.time {
-    font-size: 3em;
-    color: darkblue;
+  .col-lg-8 {
+    
+    text-align: center;
+    page-break-inside: 5px;
+  }
+  
+  #resetButton {
+      border: none;
+      color: rgb(20, 14, 1);
+      background-color: rgb(42, 165, 165);
+      padding: 5px;
+      outline: 1px;
+      width: 140px;
+  }
+  
+  /* #resetButton:hover {
+      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+      background-color: rgb(167, 81, 78);
+      transition-duration: 3ms;
+  } */
+  
+  #resetButton:after {
+     border: none;
+  }
+  
+  #resetButton:active {
+      transform: translateY(4px);
+      
+   }
+   
+   #arrowKeys {
+       width: 100%;
+       margin-left: auto;
+       margin-right: auto;
+   }
+  
+   header {
+       font-size: small;
+   }
+   footer {
+    background-color: #555;
+    color: white;
+    padding: 15px;
 }
-
-.stepsCounter {
-    color: blue;
-}
-
-.steps {
-    font-size: 2em;
-}
-
-.blackHole {
-    background: saddlebrown;
-}
-
-.glue {
-    background: lightblue;
-}
-
-.wall {
-    background: black;
-}
-.target{
-    background: #fabfab;
-}
-
-h1 {
-    color: #d54d7b;
-    font-size: 4em; 
-    font-weight: bold;
-    text-align: left;
-    text-shadow: 0 5px 5px #cf3065;
-}
-
-.noselect {
-    -webkit-touch-callout: none;/* iOS Safari */
-    -webkit-user-select: none;  /* Chrome/Safari/Opera */
-    -khtml-user-select: none;   /* Konqueror */
-    -moz-user-select: none;     /* Firefox */
-    -ms-user-select: none;      /* Internet Explorer/Edge */
-    user-select: none;          /* Non-prefixed version, currently
-                                not supported by any browser */
-}
+  
+   p {
+       margin: 5px;
+   }
+  
+   h4 {
+       padding-bottom: 20px;
+       text-align: center;
+   }
+  
+   h6 {
+       text-align: center;
+   }
+  
+  #map > img {
+    max-width: 36px;
+    max-height: 36px;
+  }
+  
+  #soko {
+      transform: translateX(3px);
+  }
