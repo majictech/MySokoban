@@ -1,45 +1,13 @@
-       /* Remove the navbar's default margin-bottom and rounded borders */
-       .navbar {
-        margin-bottom: 0;
-        border-radius: 0;
-    }
 
-    /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
-    .row.content {
-        height: 450px
-    }
-
-    /* Set gray background color and 100% height */
-    .sidenav {
-        padding-top: 20px;
-        background-color: #f1f1f1;
-        height: 100%;
-    }
-
-    /* Set black background color, white text and some padding */
-    footer {
-        background-color: #555;
-        color: white;
-        padding: 15px;
-    }
-
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-        .sidenav {
-            height: auto;
-            padding: 15px;
-        }
-
-        .row.content {
-            height: auto;
-        }
-    }
+   header {
+    font-size: small;
+}
 
 #map {
     max-width: 720px;
     margin-left: auto;
     margin-right: auto;
-     
+         
   }
   
   #menu {
@@ -47,18 +15,9 @@
     
   }
   
-  #instruct {
-      height: 576px;
-  }
-  
-  #footer {
-      margin-top: 20px;
-  
-  }
-  
-  .col-lg-12 {
+    .col-lg-12 {
     background-color: rgb(117, 115, 139);
-    color: wheat;
+    color: white;
     text-align: center;
     page-break-inside: 5px;
   }
@@ -67,7 +26,7 @@
     
     text-align: center;
     page-break-inside: 5px;
-  }
+     }
   
   #resetButton {
       border: none;
@@ -78,30 +37,26 @@
       width: 140px;
   }
   
-  /* #resetButton:hover {
-      box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-      background-color: rgb(167, 81, 78);
-      transition-duration: 3ms;
-  } */
-  
+  #resetButton:active {
+    transform: translateY(3px);
+    
+ }
+    
   #resetButton:after {
      border: none;
   }
-  
-  #resetButton:active {
-      transform: translateY(4px);
-      
-   }
    
-   #arrowKeys {
-       width: 100%;
-       margin-left: auto;
-       margin-right: auto;
-   }
+  h4 {
+    padding-bottom: 18px;
+    text-align: center;
+}
+
+h6 {
+    text-align: center;
+}
   
-   header {
-       font-size: small;
-   }
+   
+ 
    footer {
     background-color: #555;
     color: white;
@@ -109,23 +64,13 @@
 }
   
    p {
-       margin: 5px;
+       margin: 6px;
    }
-  
-   h4 {
-       padding-bottom: 20px;
-       text-align: center;
-   }
-  
-   h6 {
-       text-align: center;
-   }
+ 
   
   #map > img {
     max-width: 36px;
     max-height: 36px;
   }
   
-  #soko {
-      transform: translateX(3px);
-  }
+ 
