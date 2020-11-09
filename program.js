@@ -130,8 +130,7 @@ function moveCount() {
 // Evenetlisteners 
 
 
-window.addEventListener("keydown", function (event) { // listens to if arrow keys are pressed and
-
+window.addEventListener("keydown", function (event) {
     if (event.key == "ArrowUp" && win != true) { move(-1, 0); }
     else if (event.key == "ArrowLeft" && win != true) { move(0, -1); }
     else if (event.key == "ArrowDown" && win != true) { move(1, 0); }
