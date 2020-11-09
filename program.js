@@ -1,6 +1,6 @@
 "use strict";
 
-// Variabls
+// Variabls ................................................
 
 var imagePath = {
     " ": "Pics/floor.png",
@@ -13,86 +13,118 @@ var player;
 var tileMap = tileMap01;
 var goalCounter;
 var moveCounter;
-var won;
+var win;
 
 
 
-// Functions
+// Functions ...................................................
 
 
 //resets/Start Function 
+
 function reset() {
     goalCounter = 0;
     moveCounter = 0;
-    won = false;
+    win = false;
 
-    document.getElementById("moves").innerHTML = "<b> Moves: </b>" + goalCounter; // sets up a move counter at 0, actual counting handled by another function.
-    document.getElementById("map").innerHTML = ""; // clears previous map.
     document.getElementById("resetButton").innerHTML = "Reset";
+    //Reset
+    document.getElementById("moves").innerHTML = "<b> Moves: </b>" + goalCounter;
+    //Move Counter setup
+    document.getElementById("map").innerHTML = "";
+    //Clear Map
 
-    for (let x = 0; x < tileMap.mapGrid.length; x++) { // for loops goes through x and y axis
+    // For loop that creates the map ............................
+
+    for (let x = 0; x < tileMap.mapGrid.length; x++) {
         for (let y = 0; y < tileMap.mapGrid[x].length; y++) {
-            let tile = document.createElement("img"); // each iteration creates an image element
-            tile.id = "x" + x + "y" + y; // assign each element with an id
+            let tile = document.createElement("img");
+            tile.id = "x" + x + "y" + y;
+            // For loop to give each element IMG
 
-            let tileType = tileMap.mapGrid[x][y][0]; // gets value from SokoanBase array
-            tile.src = imagePath[tileType]; //assigns appropriate image based on sokoban array value
-
+            let tileType = tileMap.mapGrid[x][y][0];
+            tile.src = imagePath[tileType];
+            // get image based on SokobanBase array
             if (tileType == "P") {
-                player = { x, y }; // assign player coordinates
+                player = { x, y };
+                // give player position coordinates
             } else if (tileType == "G") {
-                goalCounter++; // if goal, raise goal counter
+                goalCounter++;
+                // if at goal position ++ increase goal counter
             }
 
-            document.getElementById("map").appendChild(tile); // implement tile in map element
+            document.getElementById("map").appendChild(tile);
+            // implement tile in map element
         }
     }
 
     console.log(goalCounter);
 }
 
-function move(moveX, moveY) { // function for player movement, parameters based on eventlisteners
-    let playerTilePlus = [ // array with relevant tiles at each index
-        document.getElementById("x" + player.x + "y" + player.y), // index 0: player tile
-        document.getElementById("x" + (player.x + moveX) + "y" + (player.y + moveY)), // index 1: tile next to player
-        document.getElementById("x" + (player.x + moveX + moveX) + "y" + (player.y + moveY + moveY)), // index 2: two tiles away from player
+// Player movement function .................................................
+
+function move(moveX, moveY) {
+    let playerTilePlus = [
+        document.getElementById("x" + player.x + "y" + player.y),
+        // player tile
+        document.getElementById("x" + (player.x + moveX) + "y" + (player.y + moveY)),
+        //  next tile
+        document.getElementById("x" + (player.x + moveX + moveX) + "y" + (player.y + moveY + moveY)),
+        // next next tile
     ];
 
-    let tileTypes = [playerTilePlus[0].src, playerTilePlus[1].src, playerTilePlus[2].src]; // gets what type each tile is at specified index
     let moveIsOk = false;
+    let tileTypes = [playerTilePlus[0].src, playerTilePlus[1].src, playerTilePlus[2].src];
 
-    if (tileTypes[1].endsWith(imagePath["G"]) || tileTypes[1].endsWith(imagePath[" "])) // move is allowed if tile next to player is floor or goal
-        moveIsOk = true;
-    else if (tileTypes[1].endsWith(imagePath["B"]) && (tileTypes[2].endsWith(imagePath[" "]) || tileTypes[2].endsWith(imagePath["G"]))) { // move is allowed if tile next to player is box AND tile after that is goal or floor
-        moveIsOk = true;
+    // Type of tile will be saved in tileType Variable
 
-        if (tileTypes[2].endsWith(imagePath["G"])) // if box ends up on goal, reduce goal counter
+
+    if (tileTypes[1].endsWith(imagePath["G"]) || tileTypes[1].endsWith(imagePath[" "]))
+        moveIsOk = true;
+    // if next tile is floor or goal MoveIsOk
+    else if (tileTypes[1].endsWith(imagePath["B"]) && (tileTypes[2].endsWith(imagePath[" "]) || tileTypes[2].endsWith(imagePath["G"]))) {
+        moveIsOk = true;
+        // if next tile is box and the tile after that is goal or floor MoveIsOk
+
+        if (tileTypes[2].endsWith(imagePath["G"]))
             goalCounter--;
-        if (tileMap.mapGrid[player.x + moveX][player.y + moveY][0] == "G") // if box is moved away from goal position, increase goal counter
+        // if box on goal tile reduce goal counter
+        if (tileMap.mapGrid[player.x + moveX][player.y + moveY][0] == "G")
             goalCounter++;
-        playerTilePlus[2].src = imagePath["B"]; // moves box along with player
+        // if true add to goal counter
+        playerTilePlus[2].src = imagePath["B"];
+        // if true player will move the box 
     }
 
-    if (moveIsOk == true && won != true) { // if move is allowed and won state not met
+    if (moveIsOk == true && win != true) {
         playerTilePlus[0].src = tileMap.mapGrid[player.x][player.y][0] === "G"
-            ? imagePath["G"] : imagePath[" "]; // checks SokobanBase map what tiletype is att player position and inserts that tile there
-        playerTilePlus[1].src = imagePath["P"]; // inserts player tile at index 1
+            ? imagePath["G"] : imagePath[" "];
+        // replaces tiletype at player position from MAP
+        playerTilePlus[1].src = imagePath["P"];
+        // moves player tile 
         player.y += moveY;
-        player.x += moveX; // assigns player with new coordinates
-        moveCount(); // increases move counter only when move is ok
+        player.x += moveX;
+        // new X and Y for Player
+        moveCount();
+
     }
 }
 
-function moveCount() { // adds a move counter
+// Winning Alert Message
+
+function winning() {
+    alert("You solved the puzzle in " + moveCounter + " moves");
+    highscore(moveCounter);
+    win = true;
+}
+
+// Move Counter Function
+
+function moveCount() {
     moveCounter++;
     document.getElementById("moves").innerHTML = "<b>Your Moves: </b>" + moveCounter;
 }
 
-function winning() { // when winning conditions are met
-    alert("You solved the puzzle in " + moveCounter + " moves");
-    highscore(moveCounter);
-    won = true; // prevents player from further movement
-}
 
 
 // Evenetlisteners 
@@ -100,19 +132,16 @@ function winning() { // when winning conditions are met
 
 window.addEventListener("keydown", function (event) { // listens to if arrow keys are pressed and
 
-    if (event.key == "ArrowUp" && won != true) { move(-1, 0); }
-    else if (event.key == "ArrowLeft" && won != true) { move(0, -1); }
-    else if (event.key == "ArrowDown" && won != true) { move(1, 0); }
-    else if (event.key == "ArrowRight" && won != true) { move(0, 1); }
+    if (event.key == "ArrowUp" && win != true) { move(-1, 0); }
+    else if (event.key == "ArrowLeft" && win != true) { move(0, -1); }
+    else if (event.key == "ArrowDown" && win != true) { move(1, 0); }
+    else if (event.key == "ArrowRight" && win != true) { move(0, 1); }
     event.preventDefault();
+    // Stop the Scroll Effect
 });
-
-//suppressing the normal effect of the keys to make sure that the page does not scroll
-
 
 
 window.addEventListener("keyup", function () { if (goalCounter === 0) winning(); });
 
-// checks if won state is met after move is done
 
 
